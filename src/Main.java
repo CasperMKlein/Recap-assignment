@@ -7,9 +7,11 @@ public class Main {
 
         StudentController studentController = new StudentController();
 
-        studentController.LoadStudentsFile();
-        studentController.AddStudent("Bo");
-        studentController.SaveStudentsFile();
+        studentController.loadStudentsFile();
+        studentController.addStudent("Bo");
+        studentController.deleteStudents(4);
+        studentController.saveStudentsFile();
+        studentController.printStudents();
 
     }
 

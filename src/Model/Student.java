@@ -24,4 +24,5 @@ public class Student {
     public String getNavn() {
         return name;
     }
+
 }

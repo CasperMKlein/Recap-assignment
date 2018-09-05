@@ -1,3 +1,5 @@
+package Model;
+
 public class Teacher {
     int ID;
     String navn;

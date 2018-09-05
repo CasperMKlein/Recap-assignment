@@ -1,4 +1,6 @@
-public class Student {
+package Model;
+
+public class Subject {
     int ID;
     String navn;
 

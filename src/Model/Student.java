@@ -2,7 +2,12 @@ package Model;
 
 public class Student {
     int ID;
-    String navn;
+    String name;
+
+    public Student(int ID, String navn) {
+        this.ID = ID;
+        this.name = navn;
+    }
 
     public void setID(int ID) {
         this.ID = ID;
@@ -17,6 +22,6 @@ public class Student {
     }
 
     public String getNavn() {
-        return navn;
+        return name;
     }
 }

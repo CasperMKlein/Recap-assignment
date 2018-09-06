@@ -27,7 +27,7 @@ public class StudentController {
             for (int i = 0; i < students.size(); i++) {
                 outputStream.println(
                         students.get(i).getID() + ";" +
-                                students.get(i).getNavn() + ";"
+                                students.get(i).getName() + ";"
                 );
             }
             outputStream.close();
@@ -76,7 +76,7 @@ public class StudentController {
         for (Student student:students
              ) {
 
-            System.out.println("ID: " + student.getID() + " Navn: " + student.getNavn());
+            System.out.println("ID: " + student.getID() + " Navn: " + student.getName());
 
         }
 

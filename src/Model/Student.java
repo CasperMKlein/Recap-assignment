@@ -4,24 +4,24 @@ public class Student {
     int ID;
     String name;
 
-    public Student(int ID, String navn) {
+    public Student(int ID, String name) {
         this.ID = ID;
-        this.name = navn;
+        this.name = name;
     }
 
     public void setID(int ID) {
         this.ID = ID;
     }
 
-    public void setNavn(String navn) {
-        navn = navn;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getID() {
         return ID;
     }
 
-    public String getNavn() {
+    public String getName() {
         return name;
     }
 

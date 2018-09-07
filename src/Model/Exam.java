@@ -2,10 +2,17 @@ package Model;
 
 public class Exam {
 
+    int examID;
     int teacherID;
     int studentID;
-    int examID;
     int subjectID;
+
+    public Exam(int examID, int teacherID, int studentID, int subjectID) {
+        this.examID = examID;
+        this.teacherID = teacherID;
+        this.studentID = studentID;
+        this.subjectID = subjectID;
+    }
 
     public int getTeacherID() {
         return teacherID;

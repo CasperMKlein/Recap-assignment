@@ -13,22 +13,22 @@ import java.util.Scanner;
 
 public class ExamController {
 
-    private void addExamPrivate(int teacherID, int studentID, int subjectID){
+    private void addExamPrivate(int teacherID, int studentID, int CourseID){
         int examID = 1;
         if (Viewer.exams.size() != 0){
             int highExamID = Viewer.exams.get(Viewer.exams.size()-1).getExamID();
             examID = highExamID+1;}
 
-        Viewer.exams.add(new Exam(examID,teacherID,studentID,subjectID));
+        Viewer.exams.add(new Exam(examID,teacherID,studentID,CourseID));
 
     }
 
-    public void addExam(int teacherID, int studentID, int subjectID, ArrayList<Student> students){
+    public void addExam(int teacherID, int studentID, int CourseID){
 
         boolean found = false;
-        for (Student student:students) {
+        for (Student student:Viewer.students) {
             if (student.getID() == studentID){
-                addExamPrivate(teacherID,studentID,subjectID);
+                addExamPrivate(teacherID,studentID,CourseID);
                 found = true;
                 break;
             }
@@ -51,7 +51,7 @@ public class ExamController {
                         Viewer.exams.get(i).getExamID() + ";" +
                                 Viewer.exams.get(i).getTeacherID() + ";" +
                                 Viewer.exams.get(i).getStudentID() + ";" +
-                                Viewer.exams.get(i).getSubjectID() + ";"
+                                Viewer.exams.get(i).getCourseID() + ";"
                 );
             }
             outputStream.close();
@@ -72,28 +72,10 @@ public class ExamController {
             int examID = scanner.nextInt();
             int teacherID = scanner.nextInt();
             int studentID = scanner.nextInt();
-            int subjectID = scanner.nextInt();
+            int CourseID = scanner.nextInt();
 
-            Viewer.exams.add(new Exam(examID,teacherID,studentID,subjectID));
+            Viewer.exams.add(new Exam(examID,teacherID,studentID,CourseID));
             scanner.nextLine();
-        }
-    }
-
-    public void deleteExam(int examID) {
-
-        boolean found = false;
-
-        for (Exam exam : Viewer.exams) {
-            if (exam.getExamID() == examID) {
-                Viewer.exams.remove(exam);
-                found = true;
-                break;
-            }
-        }
-        if (found) {
-            System.out.println("Exam deleted!");
-        } else {
-            System.out.println("Exam not found!");
         }
     }
 
@@ -103,9 +85,59 @@ public class ExamController {
                 ) {
 
             System.out.println("examID: " + exam.getExamID() + " Lære ID: " + exam.getTeacherID() +
-                    " Student ID: " + exam.getStudentID() + " Kursus ID: " + exam.getSubjectID());
+                    " Student ID: " + exam.getStudentID() + " Kursus ID: " + exam.getCourseID());
 
         }
+
+    }
+
+    private boolean deleteExamPrivate(int examID) {
+
+        boolean found = false;
+
+        for (Exam exam : Viewer.exams) {
+            if (exam.getExamID() == examID) {
+                Viewer.exams.remove(exam);
+                found = true;
+                break;
+
+            }
+        }
+        return found;
+    }
+
+
+    public void deleteExam (int examID){
+
+        boolean found = false;
+
+        found = deleteExamPrivate(examID);
+
+        if (found) {
+            System.out.println("Exam deleted!");
+        } else {
+            System.out.println("Exam not found!");
+        }
+
+
+    }
+
+    public void deleteExamsByCourse (int courseID) {
+
+        int counter = 0;
+
+        for (int i = 0; i < Viewer.exams.size(); i++) {
+            {
+
+            if (Viewer.exams.get(i).getCourseID() == courseID) {
+                deleteExamPrivate(Viewer.exams.get(i).getExamID());
+                counter++;
+                i--;
+            }
+
+        }}
+
+        System.out.println(counter + " exams deleted.");
 
     }
 

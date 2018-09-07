@@ -5,13 +5,13 @@ public class Exam {
     int examID;
     int teacherID;
     int studentID;
-    int subjectID;
+    int courseID;
 
-    public Exam(int examID, int teacherID, int studentID, int subjectID) {
+    public Exam(int examID, int teacherID, int studentID, int courseID) {
         this.examID = examID;
         this.teacherID = teacherID;
         this.studentID = studentID;
-        this.subjectID = subjectID;
+        this.courseID = courseID;
     }
 
     public int getTeacherID() {
@@ -38,11 +38,11 @@ public class Exam {
         this.examID = examID;
     }
 
-    public int getSubjectID() {
-        return subjectID;
+    public int getCourseID() {
+        return courseID;
     }
 
-    public void setSubjectID(int subjectID) {
-        this.subjectID = subjectID;
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 }

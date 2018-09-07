@@ -37,7 +37,7 @@ public class Viewer {
         loadAll();
 
 
-        //test();
+        test();
         //Indsæt menu
 
 
@@ -46,6 +46,8 @@ public class Viewer {
 
     public void test () {
 
+        examController.addExam(1,1,3);
+        examController.deleteExam(2);
         //Indsæt tests
 
     }

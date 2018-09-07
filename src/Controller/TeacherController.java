@@ -15,10 +15,6 @@ import static Viewer.Viewer.teachers;
 
 public class TeacherController {
 
-    public void findTeacher(){
-
-    }
-
     public void deleteTeacher(int ID) {
 
         boolean found = false;

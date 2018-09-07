@@ -4,6 +4,11 @@ public class Teacher {
     int ID;
     String navn;
 
+    public Teacher(int ID, String navn) {
+        this.ID = ID;
+        this.navn = navn;
+    }
+
     public void setID(int ID) {
         this.ID = ID;
     }

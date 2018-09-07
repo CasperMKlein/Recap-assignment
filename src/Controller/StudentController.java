@@ -72,17 +72,11 @@ public class StudentController {
     }
 
     public void printStudents(){
-
-        for (Student student:students
-             ) {
-
+        for (Student student:students) {
             System.out.println("ID: " + student.getID() + " Navn: " + student.getName());
-
         }
-
     }
-
-    }
+}
 
 
 

@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Exam;
+import Model.Student;
+import Viewer.Viewer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,27 +13,45 @@ import java.util.Scanner;
 
 public class ExamController {
 
-    private ArrayList<Exam> exams = new ArrayList<>();
-
-    public void addExam(int teacherID, int studentID, int subjectID){
+    private void addExamPrivate(int teacherID, int studentID, int subjectID){
         int examID = 1;
-        if (exams.size() != 0){
-            int highExamID = exams.get(exams.size()-1).getExamID();
+        if (Viewer.exams.size() != 0){
+            int highExamID = Viewer.exams.get(Viewer.exams.size()-1).getExamID();
             examID = highExamID+1;}
 
-        exams.add(new Exam(examID,teacherID,studentID,subjectID));;
+        Viewer.exams.add(new Exam(examID,teacherID,studentID,subjectID));
+
+    }
+
+    public void addExam(int teacherID, int studentID, int subjectID, ArrayList<Student> students){
+
+        boolean found = false;
+        for (Student student:students) {
+            if (student.getID() == studentID){
+                addExamPrivate(teacherID,studentID,subjectID);
+                found = true;
+                break;
+            }
+
+        }
+
+        if (!found) {
+            System.out.println("Teacher, Student or Subject couldn't be found.");
+        }else{
+            System.out.println("Exam added.");
+        }
 
     }
 
     public void saveExamsFile(){
         try {
             PrintWriter outputStream = new PrintWriter(new File("src/Files/ExamFile"));
-            for (int i = 0; i < exams.size(); i++) {
+            for (int i = 0; i < Viewer.exams.size(); i++) {
                 outputStream.println(
-                        exams.get(i).getExamID() + ";" +
-                                exams.get(i).getTeacherID() + ";" +
-                                exams.get(i).getStudentID() + ";" +
-                                exams.get(i).getSubjectID() + ";"
+                        Viewer.exams.get(i).getExamID() + ";" +
+                                Viewer.exams.get(i).getTeacherID() + ";" +
+                                Viewer.exams.get(i).getStudentID() + ";" +
+                                Viewer.exams.get(i).getSubjectID() + ";"
                 );
             }
             outputStream.close();
@@ -54,7 +74,7 @@ public class ExamController {
             int studentID = scanner.nextInt();
             int subjectID = scanner.nextInt();
 
-            exams.add(new Exam(examID,teacherID,studentID,subjectID));
+            Viewer.exams.add(new Exam(examID,teacherID,studentID,subjectID));
             scanner.nextLine();
         }
     }
@@ -63,9 +83,9 @@ public class ExamController {
 
         boolean found = false;
 
-        for (Exam exam : exams) {
+        for (Exam exam : Viewer.exams) {
             if (exam.getExamID() == examID) {
-                exams.remove(exam);
+                Viewer.exams.remove(exam);
                 found = true;
                 break;
             }
@@ -79,7 +99,7 @@ public class ExamController {
 
     public void printExams(){
 
-        for (Exam exam:exams
+        for (Exam exam:Viewer.exams
                 ) {
 
             System.out.println("examID: " + exam.getExamID() + " Lære ID: " + exam.getTeacherID() +

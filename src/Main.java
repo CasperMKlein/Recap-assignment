@@ -1,12 +1,12 @@
-import Controller.StudentController;
-import Controller.TeacherController;
-import Model.Student;
+import Viewer.Viewer;
 
 public class Main {
 
     public static void main(String[] args) {
-        TeacherController teacherController = new TeacherController();
-        teacherController.loadTeacherFile();
-        teacherController.printTeacher();
+
+        Viewer viewer = new Viewer();
+        viewer.menu();
+
     }
+
 }

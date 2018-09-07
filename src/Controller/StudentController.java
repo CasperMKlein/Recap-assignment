@@ -1,33 +1,34 @@
 package Controller;
 
 import Model.Student;
+import Viewer.Viewer;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class StudentController {
-    private ArrayList<Student> students = new ArrayList<>();
 
     public void addStudent(String name){
         int ID = 1;
-        if (students.size() != 0){
-        int highID = students.get(students.size()-1).getID();
+        if (Viewer.students.size() != 0){
+        int highID = Viewer.students.get(Viewer.students.size()-1).getID();
         ID = highID+1;}
 
-        students.add(new Student(ID,name));
+
+        Viewer.students.add(new Student(ID,name));
 
     }
 
     public void saveStudentsFile(){
         try {
             PrintWriter outputStream = new PrintWriter(new File("src/Files/StudentsFile"));
-            for (int i = 0; i < students.size(); i++) {
+            for (int i = 0; i < Viewer.students.size(); i++) {
                 outputStream.println(
-                        students.get(i).getID() + ";" +
-                                students.get(i).getName() + ";"
+                        Viewer.students.get(i).getID() + ";" +
+                                Viewer.students.get(i).getName() + ";"
                 );
             }
             outputStream.close();
@@ -48,7 +49,7 @@ public class StudentController {
             int ID = scanner.nextInt();
             String name = scanner.next();
 
-            students.add(new Student(ID,name));
+            Viewer.students.add(new Student(ID,name));
             scanner.nextLine();
         }
     }
@@ -57,9 +58,9 @@ public class StudentController {
 
         boolean found = false;
 
-        for (Student student : students) {
+        for (Student student : Viewer.students) {
             if (student.getID() == ID) {
-                students.remove(student);
+                Viewer.students.remove(student);
                 found = true;
                 break;
             }
@@ -72,7 +73,7 @@ public class StudentController {
     }
 
     public void printStudents(){
-        for (Student student:students) {
+        for (Student student:Viewer.students) {
             System.out.println("ID: " + student.getID() + " Navn: " + student.getName());
         }
     }

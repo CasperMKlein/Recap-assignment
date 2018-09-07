@@ -1,22 +1,25 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Course {
 
-    int ID;
-    String name;
-    String subject;
+    private int ID;
+    private String name;
+    private String subject;
 
-    ArrayList<Student> students = new ArrayList();
-    ArrayList<Teacher> teachers = new ArrayList();
+    private List<Integer> students = new ArrayList();
+    private List<Integer> teachers = new ArrayList();
 
-    public Course(int ID, String name, String subject, ArrayList<Student> students, ArrayList<Teacher> teachers) {
+
+
+    public Course(int ID, String name, String subject/*, ArrayList<Student> students, ArrayList<Teacher> teachers*/) {
         this.ID = ID;
         this.name = name;
         this.subject = subject;
-        this.students = students;
-        this.teachers = teachers;
+        //this.students = students;
+        //this.teachers = teachers;
     }
 
     // getters and setters
@@ -45,21 +48,54 @@ public class Course {
         this.subject = subject;
     }
 
-    public ArrayList<Teacher> getTeachers() {
+    public List<Integer> getAllTeachers() {
         return teachers;
     }
 
-    public void setTeachers(ArrayList<Teacher> teachers) {
+    public void setAllTeachers(ArrayList<Integer> teachers) {
         this.teachers = teachers;
     }
 
-    public ArrayList<Student> getStudents() {
+    public List<Integer> getAllStudents() {
         return students;
     }
 
-    public void setStudents(ArrayList<Student> students) {
+    public void setAllStudents(ArrayList<Integer> students) {
         this.students = students;
     }
+
+    public Integer getStudentID(int arrayID) {
+        return this.students.get(arrayID);
+    }
+
+    public void addStudent(int studentID) {
+
+        boolean found = false;
+
+        for (int i = 0; i < this.students.size(); i++) {
+            if (getStudentID(i) == studentID) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            System.out.println("This student is already participating in this course!");
+        } else {
+            this.students.add(studentID);
+        }
+    }
+
+    public void deleteStudent(int studentID) {
+
+        for (int i = 0; i < this.students.size(); i++) {
+            if (getStudentID(i) == studentID) {
+                this.students.remove(i);
+                break;
+            }
+        }
+    }
+
+
 
 
 

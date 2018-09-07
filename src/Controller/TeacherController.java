@@ -5,6 +5,7 @@ import Model.Teacher;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -22,11 +23,16 @@ public class TeacherController {
 
     }
 
-    public void saveTeacher(){
-
+    public void saveTeacher() throws FileNotFoundException {
+        PrintWriter printWriter = new PrintWriter("src/Files/TeacherFile");
+        for (int i = 0; i < teachers.size();i++){
+            printWriter.print(teachers.get(i).getID()+";"+teachers.get(i).getName()+";"+"\n");
+            printTeachers();
+        }
+        printWriter.close();
     }
 
-    public void printTeacher(){
+    public void printTeachers(){
         for(int i = 0;i < teachers.size();i++){
             System.out.println(teachers.get(i).toString());
         }

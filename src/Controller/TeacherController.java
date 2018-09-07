@@ -11,7 +11,26 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class TeacherController {
-    List<Teacher> teacherList = new ArrayList<>();
+    private List<Teacher> teacherList = new ArrayList<>();
+
+    public void removeTeacher(List list){
+
+    }
+
+    public void addTeacher(List list){
+
+    }
+
+    public void saveTeacher(){
+
+    }
+
+    public void printTeacher(){
+        for(int i = 0;i < teacherList.size();i++){
+            System.out.println(teacherList.get(i).toString());
+        }
+    }
+
     public void loadTeacherFile(){
         Scanner scanner = null;
         try {

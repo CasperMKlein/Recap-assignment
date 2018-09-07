@@ -2,18 +2,18 @@ package Model;
 
 public class Teacher {
     int ID;
-    String navn;
+    String name;
 
-    public Teacher(int ID, String navn) {
+    public Teacher(int ID, String name) {
         this.ID = ID;
-        this.navn = navn;
+        this.name = name;
     }
 
     public void setID(int ID) {
         this.ID = ID;
     }
 
-    public void setNavn(String navn) {
+    public void setName(String navn) {
         navn = navn;
     }
 
@@ -21,7 +21,12 @@ public class Teacher {
         return ID;
     }
 
-    public String getNavn() {
-        return navn;
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return ID + " " + name;
     }
 }

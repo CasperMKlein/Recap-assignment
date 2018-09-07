@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+import static Viewer.Viewer.teachers;
+
 public class TeacherController {
-    private List<Teacher> teacherList = new ArrayList<>();
 
     public void removeTeacher(List list){
 
@@ -26,8 +27,8 @@ public class TeacherController {
     }
 
     public void printTeacher(){
-        for(int i = 0;i < teacherList.size();i++){
-            System.out.println(teacherList.get(i).toString());
+        for(int i = 0;i < teachers.size();i++){
+            System.out.println(teachers.get(i).toString());
         }
     }
 
@@ -42,7 +43,7 @@ public class TeacherController {
             int ID = scanner.nextInt();
             String name = scanner.next();
 
-            teacherList.add(new Teacher(ID,name));
+            teachers.add(new Teacher(ID,name));
             scanner.nextLine();
         }
     }

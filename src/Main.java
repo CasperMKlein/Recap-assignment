@@ -1,3 +1,4 @@
+import Controller.TeacherController;
 import Viewer.Viewer;
 
 public class Main {
@@ -6,7 +7,7 @@ public class Main {
 
         Viewer viewer = new Viewer();
         viewer.menu();
-
+        TeacherController teacherController = new TeacherController();
     }
 
 }

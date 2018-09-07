@@ -35,7 +35,6 @@ public class StudentController {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     public void loadStudentsFile(){

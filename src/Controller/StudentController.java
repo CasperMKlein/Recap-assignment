@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Student;
+import Model.Teacher;
 import Viewer.Viewer;
 
 import java.io.File;
@@ -57,6 +58,9 @@ public class StudentController {
 
         boolean found = false;
 
+        for (Teacher teacher:Viewer.teachers) {
+
+        }
         for (Student student : Viewer.students) {
             if (student.getID() == ID) {
                 Viewer.students.remove(student);
@@ -77,6 +81,3 @@ public class StudentController {
         }
     }
 }
-
-
-

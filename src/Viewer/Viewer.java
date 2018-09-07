@@ -3,6 +3,7 @@ package Viewer;
 import Controller.*;
 import Model.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Viewer {
@@ -24,16 +25,18 @@ public class Viewer {
 
         studentController.loadStudentsFile();
         examController.loadExamsFile();
+        teacherController.loadTeacherFile();
 
     }
 
-    public void saveAll (){
+    public void saveAll () throws FileNotFoundException {
         studentController.saveStudentsFile();
         examController.saveExamsFile();
+        teacherController.saveTeacher();
 
     }
 
-    public void menu (){
+    public void menu () throws FileNotFoundException {
         loadAll();
 
 

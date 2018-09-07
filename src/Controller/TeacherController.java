@@ -48,7 +48,6 @@ public class TeacherController {
         PrintWriter printWriter = new PrintWriter("src/Files/TeacherFile");
         for (int i = 0; i < teachers.size();i++){
             printWriter.print(teachers.get(i).getID()+";"+teachers.get(i).getName()+";"+"\n");
-            printTeachers();
         }
         printWriter.close();
     }

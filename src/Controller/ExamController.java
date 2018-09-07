@@ -79,7 +79,7 @@ public class ExamController {
         }
     }
 
-    public void deleteexams(int examID) {
+    public void deleteExam(int examID) {
 
         boolean found = false;
 

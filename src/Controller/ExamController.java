@@ -43,6 +43,10 @@ public class ExamController {
 
     }
 
+    public void addExamsByCourse(){
+        //Mangler course
+    }
+
     public void saveExamsFile(){
         try {
             PrintWriter outputStream = new PrintWriter(new File("src/Files/ExamFile"));
@@ -106,7 +110,6 @@ public class ExamController {
         return found;
     }
 
-
     public void deleteExam (int examID){
 
         boolean found = false;
@@ -142,3 +145,6 @@ public class ExamController {
     }
 
 }
+//Arbejd på:
+//addExamsByCourse
+//addExam

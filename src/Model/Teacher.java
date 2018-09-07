@@ -1,8 +1,8 @@
 package Model;
 
 public class Teacher {
-    int ID;
-    String name;
+    private int ID;
+    private String name;
 
     public Teacher(int ID, String name) {
         this.ID = ID;

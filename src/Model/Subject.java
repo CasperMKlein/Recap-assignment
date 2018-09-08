@@ -1,22 +1,22 @@
 package Model;
 
 public class Subject {
-    int ID;
-    String navn;
+    String name;
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public String getName() {
+        return name;
     }
 
-    public void setNavn(String navn) {
-        navn = navn;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getID() {
-        return ID;
+    public Subject(String name) {
+        this.name = name;
     }
 
-    public String getNavn() {
-        return navn;
+    @Override
+    public String toString() {
+        return name;
     }
 }

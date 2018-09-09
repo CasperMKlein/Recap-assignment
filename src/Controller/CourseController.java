@@ -7,6 +7,7 @@ import Viewer.Viewer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -14,6 +15,74 @@ import java.util.Scanner;
 
 public class CourseController {
     private List<Course> courseList = new ArrayList<>();
+
+    public void saveCourseFile(){
+        try {
+            PrintWriter outputStream = new PrintWriter(new File("src/Files/CourseFile"));
+            for (int i = 0; i < Viewer.courses.size(); i++) {
+                outputStream.print(
+                        Viewer.courses.get(i).getID() + ";" +
+                                Viewer.courses.get(i).getName() + ";" +
+                                Viewer.courses.get(i).getSubject() + ";"
+                );
+
+                for (int j = 0; j < Viewer.courses.get(i).getAllStudents().size(); j++) {
+
+                    outputStream.print(
+                            Viewer.courses.get(i).getStudentID(j) + ";"
+                    );
+
+                }
+                outputStream.print(".;");
+
+                for (int j = 0; j < Viewer.courses.get(i).getAllTeachers().size(); j++) {
+
+                    outputStream.print(
+                            Viewer.courses.get(i).getTeacherID(j) + ";"
+                    );
+
+                }
+                outputStream.print("\n");
+
+            }
+            outputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadCourseFile(){
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File("src/Files/CourseFile")).useDelimiter(";").useLocale(Locale.US);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        int current = 0; //counts the spot in the course arraylist
+        while(scanner.hasNextInt()){
+            int ID = scanner.nextInt();
+            String name = scanner.next();
+            String subject = scanner.next();
+
+            Viewer.courses.add(new Course(ID,name,subject));
+
+            while(scanner.hasNextInt()) {
+                int studentID = scanner.nextInt();
+
+                Viewer.courses.get(current).addStudent(studentID);
+            }
+            scanner.next();
+
+            while(scanner.hasNextInt()) {
+                int teacherID = scanner.nextInt();
+
+                Viewer.courses.get(current).addTeacher(teacherID);
+            }
+
+            scanner.nextLine();
+            current++;
+        }
+    }
 
     public void addCourse (String name, String subject) {
 
@@ -93,6 +162,7 @@ public class CourseController {
 
         boolean foundCourse = false;
         boolean foundStudent = false;
+        boolean alreadyParticipating = false; //makes sure we don't type out the wrong message
         Course course = null;
 
         //find the course
@@ -107,15 +177,18 @@ public class CourseController {
         if (foundCourse) {
             for (int i = 0; i < Viewer.students.size(); i++) {
                 if (studentID == Viewer.students.get(i).getID()) {
-                    course.addStudent(studentID);
+                    alreadyParticipating = course.addStudent(studentID);
                     foundStudent = true;
                     break;
                 }
             }
-            if (foundStudent) {
-                System.out.println("Student added to course");
-            } else {
-                System.out.println("Student not found");
+
+            if (!alreadyParticipating) {
+                if (foundStudent) {
+                    System.out.println("Student added to course");
+                } else {
+                    System.out.println("Student not found");
+                }
             }
 
         } else {
@@ -137,8 +210,57 @@ public class CourseController {
 
     }
 
+    public void addTeacher (int courseID, int teacherID) {
+
+        boolean foundCourse = false;
+        boolean foundTeacher = false;
+        boolean alreadyParticipating = false; //makes sure we don't type out the wrong message
+        Course course = null;
+
+        //find the course
+        for (int i = 0; i < Viewer.courses.size(); i++) {
+            if (courseID == Viewer.courses.get(i).getID()) {
+                course = Viewer.courses.get(i);
+                foundCourse = true;
+                break;
+            }
+        }
+        //find the teacher
+        if (foundCourse) {
+            for (int i = 0; i < Viewer.teachers.size(); i++) {
+                if (teacherID == Viewer.teachers.get(i).getID()) {
+                    alreadyParticipating = course.addTeacher(teacherID);
+                    foundTeacher = true;
+                    break;
+                }
+            }
+
+            if (!alreadyParticipating) {
+                if (foundTeacher) {
+                    System.out.println("Teacher added to course");
+                } else {
+                    System.out.println("Teacher not found");
+                }
+            }
+
+        } else {
+            System.out.println("Course not found");
+        }
 
 
+    }
+
+    public void readTeachers (int courseID) {
+
+        Course course = findCourse(courseID);
+
+        for (int i = 0; i < course.getAllTeachers().size(); i++) {
+
+            System.out.println(course.getTeacherID(i));
+
+        }
+
+    }
 
 
 }

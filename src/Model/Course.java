@@ -56,6 +56,52 @@ public class Course {
         this.teachers = teachers;
     }
 
+    public Integer getTeacherID(int arrayID) {
+        return this.teachers.get(arrayID);
+    }
+
+    public boolean addTeacher(int teacherID) {
+
+        //the returned value determines whether the teacher is already participating in the course or not
+
+        boolean found = false;
+
+        for (int i = 0; i < this.teachers.size(); i++) {
+            if (getTeacherID(i) == teacherID) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            System.out.println("This teacher is already teaching in this course!");
+            return true;
+        } else {
+            this.teachers.add(teacherID);
+            return false;
+        }
+    }
+
+    //mainly here to fulfill crud requirements
+    public void updateTeacher(int teacherID, int newTeacherID) {
+
+        for (int i = 0; i < this.teachers.size(); i++) {
+            if (getTeacherID(i) == teacherID) {
+                this.teachers.set(i, newTeacherID);
+            }
+        }
+
+    }
+
+    public void deleteTeacher(int teacherID) {
+
+        for (int i = 0; i < this.teachers.size(); i++) {
+            if (getTeacherID(i) == teacherID) {
+                this.teachers.remove(i);
+                break;
+            }
+        }
+    }
+
     public List<Integer> getAllStudents() {
         return students;
     }
@@ -68,7 +114,9 @@ public class Course {
         return this.students.get(arrayID);
     }
 
-    public void addStudent(int studentID) {
+    public boolean addStudent(int studentID) {
+
+        //the returned value determines whether the student is already participating in the course or not
 
         boolean found = false;
 
@@ -80,9 +128,22 @@ public class Course {
         }
         if (found) {
             System.out.println("This student is already participating in this course!");
+            return true;
         } else {
             this.students.add(studentID);
+            return false;
         }
+    }
+
+    //mainly here to fulfill crud requirements
+    public void updateStudent(int studentID, int newStudentID) {
+
+        for (int i = 0; i < this.students.size(); i++) {
+            if (getStudentID(i) == studentID) {
+                this.students.set(i, newStudentID);
+            }
+        }
+
     }
 
     public void deleteStudent(int studentID) {

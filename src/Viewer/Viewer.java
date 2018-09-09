@@ -17,7 +17,7 @@ public class Viewer {
 
     StudentController studentController = new StudentController();
     TeacherController teacherController = new TeacherController();
-    //CourseController courseController = new CourseController();
+    CourseController courseController = new CourseController();
     //SubjectController subjectController = new SubjectController();
     ExamController examController = new ExamController();
 
@@ -26,6 +26,7 @@ public class Viewer {
         studentController.loadStudentsFile();
         examController.loadExamsFile();
         teacherController.loadTeacherFile();
+        courseController.loadCourseFile();
 
     }
 
@@ -40,7 +41,6 @@ public class Viewer {
         loadAll();
 
 
-        test();
         //Indsæt menu
 
 

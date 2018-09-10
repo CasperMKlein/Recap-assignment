@@ -18,7 +18,7 @@ public class Viewer {
     StudentController studentController = new StudentController();
     TeacherController teacherController = new TeacherController();
     CourseController courseController = new CourseController();
-    //SubjectController subjectController = new SubjectController();
+    SubjectController subjectController = new SubjectController();
     ExamController examController = new ExamController();
 
     public void loadAll (){
@@ -27,6 +27,7 @@ public class Viewer {
         examController.loadExamsFile();
         teacherController.loadTeacherFile();
         courseController.loadCourseFile();
+        subjectController.loadSubjectFile();
 
     }
 
@@ -34,6 +35,8 @@ public class Viewer {
         studentController.saveStudentsFile();
         examController.saveExamsFile();
         teacherController.saveTeacher();
+        courseController.saveCourseFile();
+        subjectController.saveSubjects();
 
     }
 
@@ -48,9 +51,7 @@ public class Viewer {
     }
 
     public void test () {
-
-        examController.addExam(1,1,3);
-        examController.deleteExam(2);
+        
         //Indsæt tests
 
     }

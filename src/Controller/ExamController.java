@@ -1,7 +1,9 @@
 package Controller;
 
+import Model.Course;
 import Model.Exam;
 import Model.Student;
+import Model.Teacher;
 import Viewer.Viewer;
 
 import java.io.File;
@@ -23,22 +25,56 @@ public class ExamController {
 
     }
 
-    public void addExam(int teacherID, int studentID, int CourseID){
+    public void addExam(int teacherID, int studentID, int courseID){
 
-        boolean found = false;
-        for (Student student:Viewer.students) {
-            if (student.getID() == studentID){
-                addExamPrivate(teacherID,studentID,CourseID);
-                found = true;
-                break;
+        int found = 0;
+
+
+        for (Course course:Viewer.courses
+             ) {
+            if (course.getID() == courseID){
+                found++;
+            for (Teacher teacher : Viewer.teachers
+                    ) {
+
+                if (teacher.getID() == teacherID){
+
+                    found++;
+
+                    for (Student student : Viewer.students) {
+
+                        if (student.getID() == studentID) {
+                            addExamPrivate(teacherID, studentID, courseID);
+                            found++;
+                            break;
+                        }
+                    }
+
+                    break;
+                }
             }
-
+            break;
+            }
         }
 
-        if (!found) {
-            System.out.println("Teacher, Student or Subject couldn't be found.");
-        }else{
-            System.out.println("Exam added.");
+        System.out.println(found);
+
+        switch (found) {
+            case 0:
+                System.out.println("Course couldn't be found.");
+                break;
+
+            case 1:
+                System.out.println("Teacher couldn't be found.");
+                break;
+
+            case 2:
+                System.out.println("Student couldn't be found.");
+                break;
+
+            case 3:
+                System.out.println("Exam added.");
+                break;
         }
 
     }

@@ -97,19 +97,17 @@ public class CourseController {
 
     }
 
-    public void readCourse (int courseID) {
+    public void readCourse (int courseID, boolean displayMembers) {
 
-        for (int i = 0; i < Viewer.courses.size(); i++) {
-            if (courseID == Viewer.courses.get(i).getID()) {
+        Course course = findCourse(courseID);
 
-                System.out.println(
-                        Viewer.courses.get(i).getID() + " | "
-                      + Viewer.courses.get(i).getName() + " | "
-                      + Viewer.courses.get(i).getSubject()  );
+        System.out.println("Course ID: " + course.getID()
+                + "\t| Name: " + course.getName()
+                + "\t| Subject: " + course.getSubject() );
 
-                break;
-            }
-
+        if (displayMembers) {
+            readTeachers(courseID);
+            readStudents(courseID);
         }
 
     }
@@ -202,9 +200,16 @@ public class CourseController {
 
         Course course = findCourse(courseID);
 
+        System.out.println("- - Students - -");
         for (int i = 0; i < course.getAllStudents().size(); i++) {
 
-            System.out.println(course.getStudentID(i));
+
+            for (int j = 0; j < Viewer.students.size(); j++) {
+                if (Viewer.students.get(j).getID() == course.getStudentID(i)) {
+                    System.out.println("ID: " + Viewer.students.get(j).getID() +
+                        "\t| Name: " + Viewer.students.get(j).getName());
+                }
+            }
 
         }
 
@@ -254,10 +259,15 @@ public class CourseController {
 
         Course course = findCourse(courseID);
 
+        System.out.println("- - Teachers - -");
         for (int i = 0; i < course.getAllTeachers().size(); i++) {
 
-            System.out.println(course.getTeacherID(i));
-
+            for (int j = 0; j < Viewer.teachers.size(); j++) {
+                if (Viewer.teachers.get(j).getID() == course.getTeacherID(i)) {
+                    System.out.println("ID: " + Viewer.teachers.get(j).getID() +
+                            "\t| Name: " + Viewer.teachers.get(j).getName());
+                }
+            }
         }
 
     }

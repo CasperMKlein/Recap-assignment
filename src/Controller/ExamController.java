@@ -57,8 +57,6 @@ public class ExamController {
             }
         }
 
-        System.out.println(found);
-
         switch (found) {
             case 0:
                 System.out.println("Course couldn't be found.");
@@ -79,8 +77,49 @@ public class ExamController {
 
     }
 
-    public void addExamsByCourse(){
-        //Mangler course
+    public void addExamsByCourse(int teacherID,int courseID) {
+
+
+        int found = 0;
+
+
+        for (Course course : Viewer.courses) {
+
+            if (course.getID() == courseID) {
+                found++;
+                for (Teacher teacher : Viewer.teachers) {
+
+                    if (teacher.getID() == teacherID) {
+
+                        found++;
+
+                        for (Integer student : Viewer.courses.get(courseID-1).getAllStudents()
+
+                                ) {
+
+                            addExamPrivate(teacherID, student, courseID);
+
+                        }
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+        switch (found) {
+            case 0:
+                System.out.println("Course couldn't be found.");
+                break;
+
+            case 1:
+                System.out.println("Teacher couldn't be found.");
+                break;
+
+            case 2:
+                System.out.println("Exam added.");
+                break;
+        }
     }
 
     public void saveExamsFile(){
@@ -181,6 +220,3 @@ public class ExamController {
     }
 
 }
-//Arbejd på:
-//addExamsByCourse
-//addExam

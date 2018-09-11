@@ -153,6 +153,7 @@ public class CourseController {
                 return Viewer.courses.get(i);
             }
         }
+
         return null;
     }
 

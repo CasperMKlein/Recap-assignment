@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Course;
 import Model.Student;
 import Model.Teacher;
 import Viewer.Viewer;
@@ -11,6 +12,8 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class StudentController {
+
+    public static CourseController courseController = new CourseController();
 
     public void addStudent(String name){
         int ID = 1;
@@ -54,7 +57,7 @@ public class StudentController {
         }
     }
 
-    public void deleteStudents(int ID) {
+    public void deleteStudent(int studentID) {
 
         boolean found = false;
 
@@ -62,7 +65,7 @@ public class StudentController {
 
         }
         for (Student student : Viewer.students) {
-            if (student.getID() == ID) {
+            if (student.getID() == studentID) {
                 Viewer.students.remove(student);
                 found = true;
                 break;
@@ -75,9 +78,53 @@ public class StudentController {
         }
     }
 
-    public void printStudents(){
+    public void printStudents(boolean viewCourses){
         for (Student student:Viewer.students) {
+
             System.out.println("ID: " + student.getID() + " Navn: " + student.getName());
+
+            if (viewCourses) {
+
+                for (int i = 0; i < Viewer.courses.size(); i++) {
+
+                    for (int j = 0; j < Viewer.courses.get(i).getAllStudents().size(); j++) {
+
+                        if (Viewer.courses.get(i).getAllStudents().get(j) == student.getID()) {
+
+                            courseController.readCourse(Viewer.courses.get(i).getID(),false);
+                        }
+                    }
+                }
+                System.out.println("___________________________________________");
+            }
         }
     }
+
+    public void updateStudent(int studentID, String newName) {
+
+        int array = 0;
+
+        for (Student student:Viewer.students) {
+
+            if (student.getID() == studentID) {
+                Viewer.students.get(array).setName(newName);
+                break;
+            }
+            array++;
+        }
+    }
+
+    public boolean studentExist(int studentID) {
+
+        boolean success = false;
+
+        for (Student student:Viewer.students) {
+            if (student.getID() == studentID) {
+                success = true;
+                break;
+            }
+        }
+        return success;
+    }
+
 }

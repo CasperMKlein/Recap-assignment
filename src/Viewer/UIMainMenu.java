@@ -6,7 +6,7 @@ public class UIMainMenu {
 
     public static Scanner in = new Scanner(System.in);
 
-    public static void MainMenu() {
+    public static void mainMenu() {
 
         System.out.println(
                 "_____Welcome_____" +
@@ -22,9 +22,9 @@ public class UIMainMenu {
         String answer = in.nextLine();
 
         switch (answer) {
-            case "1": System.out.println("Student!1!!");
+            case "1": UIStudentMenu.studentMenu();
                 break;
-            case "2": System.out.println("Course!!!!!");
+            case "2": UICourseMenu.courseMenu();
                 break;
             case "3": System.out.println("subject!!!");
                 break;
@@ -32,18 +32,10 @@ public class UIMainMenu {
                 break;
             case "5": System.out.println("Teachers!!!!");
                 break;
-            case "6": System.out.println("Time to quit!!!");
+            case "6": // ¯\_(ツ)_/¯
                 break;
-            default: MainMenu();
+            default: mainMenu();
                 break;
         }
-
-
-
-
     }
-
-
-
-
 }

@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class UIStudentMenu {
 
     public static Scanner in = new Scanner(System.in);
-
     public static StudentController studentController = new StudentController();
 
     public static void studentMenu() {
@@ -102,10 +101,7 @@ public class UIStudentMenu {
                 System.out.println("Please enter numbers only!");
                 updateStudent();
             }
-
         }
-
-
     }
 
     private static void deleteStudent() {

@@ -14,7 +14,7 @@ public class Teacher {
     }
 
     public void setName(String navn) {
-        navn = navn;
+        this.name = navn;
     }
 
     public int getID() {

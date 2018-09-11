@@ -1,6 +1,5 @@
 package Viewer;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class UIMainMenu {
@@ -31,7 +30,7 @@ public class UIMainMenu {
                 break;
             case "4": System.out.println("Exams!!!!!!!!");
                 break;
-            case "5": UITeacherMenu.uiTeacherMenu();
+            case "5": UITeacherMenu.teacherMenu();
                 break;
             case "6": // ¯\_(ツ)_/¯
                 break;

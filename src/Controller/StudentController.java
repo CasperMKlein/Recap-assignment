@@ -81,7 +81,7 @@ public class StudentController {
     public void printStudents(boolean viewCourses){
         for (Student student:Viewer.students) {
 
-            System.out.println("ID: " + student.getID() + " Navn: " + student.getName());
+            System.out.println("ID: " + student.getID() + " Name: " + student.getName());
 
             if (viewCourses) {
 

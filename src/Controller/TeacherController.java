@@ -15,6 +15,8 @@ import static Viewer.Viewer.teachers;
 
 public class TeacherController {
 
+    public static CourseController courseController = new CourseController();
+
     public void deleteTeacher(int ID) {
 
         boolean found = false;
@@ -56,9 +58,26 @@ public class TeacherController {
         }
     }
 
-    public void printTeachers(){
-        for(int i = 0;i < teachers.size();i++){
-            System.out.println(teachers.get(i).toString());
+    public void printTeachers(boolean viewCourses){
+
+        for (Teacher teacher:Viewer.teachers) {
+
+            System.out.println("ID: " + teacher.getID() + " Name: " + teacher.getName());
+
+            if (viewCourses) {
+
+                for (int i = 0; i < Viewer.courses.size(); i++) {
+
+                    for (int j = 0; j < Viewer.courses.get(i).getAllTeachers().size(); j++) {
+
+                        if (Viewer.courses.get(i).getAllTeachers().get(j) == teacher.getID()) {
+
+                            courseController.readCourse(Viewer.courses.get(i).getID(),false);
+                        }
+                    }
+                }
+                System.out.println("___________________________________________");
+            }
         }
     }
 
@@ -76,5 +95,32 @@ public class TeacherController {
             teachers.add(new Teacher(ID,name));
             scanner.nextLine();
         }
+    }
+
+    public void updateTeacher(int teacherID, String newName) {
+
+        int array = 0;
+
+        for (Teacher teacher:Viewer.teachers) {
+
+            if (teacher.getID() == teacherID) {
+                Viewer.teachers.get(array).setName(newName);
+                break;
+            }
+            array++;
+        }
+    }
+
+    public boolean teacherExist(int teacherID) {
+
+        boolean success = false;
+
+        for (Teacher teacher:Viewer.teachers) {
+            if (teacher.getID() == teacherID) {
+                success = true;
+                break;
+            }
+        }
+        return success;
     }
 }

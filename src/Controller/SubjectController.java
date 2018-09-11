@@ -23,9 +23,9 @@ public class SubjectController {
             }
         }
         if (found) {
-            System.out.println("Subject deleted!");
+            System.out.println("Subject removed");
         } else {
-            System.out.println("Subject not found!");
+            System.out.println("Subject not found");
         }
     }
 

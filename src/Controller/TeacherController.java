@@ -27,9 +27,9 @@ public class TeacherController {
             }
         }
         if (found) {
-            System.out.println("Teacher deleted!");
+            System.out.println("Teacher removed\n");
         } else {
-            System.out.println("Teacher not found!");
+            System.out.println("Teacher not found\n");
         }
     }
 

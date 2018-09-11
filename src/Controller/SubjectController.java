@@ -33,12 +33,16 @@ public class SubjectController {
         Viewer.subjects.add(new Subject(name));
     }
 
-    public void saveSubjects() throws FileNotFoundException {
-        PrintWriter printWriter = new PrintWriter("src/Files/SubjectFile");
-        for (int i = 0; i < subjects.size();i++){
-            printWriter.print(subjects.get(i).getName()+";"+"\n");
+    public void saveSubjects() {
+        try {
+            PrintWriter printWriter = new PrintWriter("src/Files/SubjectFile");
+            for (int i = 0; i < subjects.size(); i++) {
+                printWriter.print(subjects.get(i).getName() + ";" + "\n");
+            }
+            printWriter.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        printWriter.close();
     }
 
     public void printSubjects(){

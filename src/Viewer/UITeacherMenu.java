@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class UITeacherMenu{
-    public static void uiTeacherMenu() throws FileNotFoundException {
+    public static void uiTeacherMenu() {
         TeacherController teacherController = new TeacherController();
         Scanner in = new Scanner(System.in);
         System.out.print("Teacher Menu\n"

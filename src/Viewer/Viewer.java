@@ -45,6 +45,7 @@ public class Viewer {
 
 
         //Indsæt menu
+        UIMainMenu.mainMenu();
 
 
         saveAll();

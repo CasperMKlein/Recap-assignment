@@ -44,12 +44,16 @@ public class TeacherController {
         Viewer.teachers.add(new Teacher(ID,name));
     }
 
-    public void saveTeacher() throws FileNotFoundException {
-        PrintWriter printWriter = new PrintWriter("src/Files/TeacherFile");
-        for (int i = 0; i < teachers.size();i++){
-            printWriter.print(teachers.get(i).getID()+";"+teachers.get(i).getName()+";"+"\n");
+    public void saveTeacher() {
+        try {
+            PrintWriter printWriter = new PrintWriter("src/Files/TeacherFile");
+            for (int i = 0; i < teachers.size(); i++) {
+                printWriter.print(teachers.get(i).getID() + ";" + teachers.get(i).getName() + ";" + "\n");
+            }
+            printWriter.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        printWriter.close();
     }
 
     public void printTeachers(){

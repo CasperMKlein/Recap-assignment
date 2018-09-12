@@ -13,30 +13,19 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class ExamController{
+public class ExamController {
 
-    public ArrayList<Exam> chooseList (String choice){
-
-        if (choice == ""){
-            return Viewer.exams;
-        } else if (choice == "ManAss"){
-            return Viewer.mandatoryAssignments;
-        }
-
-        return null;
-    }
-
-    private void addExamPrivate(int studentID, int CourseID,String description,String selection){
+    private void addExamPrivate(int teacherID, int studentID, int CourseID){
         int examID = 1;
-        if (chooseList(selection).size() != 0){
-            int highExamID = chooseList(selection).get(chooseList(selection).size()-1).getExamID();
+        if (Viewer.exams.size() != 0){
+            int highExamID = Viewer.exams.get(Viewer.exams.size()-1).getExamID();
             examID = highExamID+1;}
 
-        chooseList(selection).add(new Exam(examID,studentID,CourseID,description));
+        Viewer.exams.add(new Exam(examID,teacherID,studentID,CourseID));
 
     }
 
-    public void addExam(int studentID, int courseID,String description,String selection){
+    public void addExam(int teacherID, int studentID, int courseID){
 
         int found = 0;
 
@@ -45,19 +34,15 @@ public class ExamController{
                 ) {
             if (course.getID() == courseID){
                 found++;
-<<<<<<< Updated upstream
                 for (Teacher teacher : Viewer.teachers
                         ) {
 
                     if (teacher.getID() == teacherID){
 
                         found++;
-=======
->>>>>>> Stashed changes
 
                         for (Student student : Viewer.students) {
 
-<<<<<<< Updated upstream
                             if (student.getID() == studentID) {
                                 addExamPrivate(teacherID, studentID, courseID);
                                 found++;
@@ -69,15 +54,6 @@ public class ExamController{
                     }
                 }
                 break;
-=======
-                        if (student.getID() == studentID) {
-                            addExamPrivate(studentID, courseID,description,selection);
-                            found++;
-                            break;
-                        }
-                    }
-                    break;
->>>>>>> Stashed changes
             }
         }
 
@@ -87,20 +63,21 @@ public class ExamController{
                 break;
 
             case 1:
-                System.out.println("Student couldn't be found.");
+                System.out.println("Teacher couldn't be found.");
                 break;
 
             case 2:
-                if(selection=="ManAss"){
-                    System.out.println("Mandatory Assignment added.");
-                }else{
-                System.out.println("Exam added.");}
+                System.out.println("Student couldn't be found.");
+                break;
+
+            case 3:
+                System.out.println("Exam added.");
                 break;
         }
 
     }
 
-    public void addExamsByCourse(int courseID,String description,String selection) {
+    public void addExamsByCourse(int teacherID,int courseID) {
 
 
         int found = 0;
@@ -110,41 +87,50 @@ public class ExamController{
 
             if (course.getID() == courseID) {
                 found++;
+                for (Teacher teacher : Viewer.teachers) {
+
+                    if (teacher.getID() == teacherID) {
+
+                        found++;
 
                         for (Integer student : Viewer.courses.get(courseID-1).getAllStudents()
 
                                 ) {
 
-                            addExamPrivate(student, courseID, description,selection);
+                            addExamPrivate(teacherID, student, courseID);
 
                         }
-                break;
+                        break;
+                    }
                 }
-
+                break;
+            }
         }
 
         switch (found) {
             case 0:
                 System.out.println("Course couldn't be found.");
                 break;
+
             case 1:
-                if(selection=="ManAss"){
-                    System.out.println("Mandatory assignments added.");
-                }
-                System.out.println("Exams added.");
+                System.out.println("Teacher couldn't be found.");
+                break;
+
+            case 2:
+                System.out.println("Exam added.");
                 break;
         }
     }
 
-    public void saveExamsFile(String fileName,String selection){
+    public void saveExamsFile(){
         try {
-            PrintWriter outputStream = new PrintWriter(new File("src/Files/"+fileName));
-            for (int i = 0; i < chooseList(selection).size(); i++) {
+            PrintWriter outputStream = new PrintWriter(new File("src/Files/ExamFile"));
+            for (int i = 0; i < Viewer.exams.size(); i++) {
                 outputStream.println(
-                        chooseList(selection).get(i).getExamID() + ";" +
-                                chooseList(selection).get(i).getStudentID() + ";" +
-                                chooseList(selection).get(i).getCourseID() + ";"+
-                                chooseList(selection).get(i).getDescription() + ";"
+                        Viewer.exams.get(i).getExamID() + ";" +
+                                Viewer.exams.get(i).getTeacherID() + ";" +
+                                Viewer.exams.get(i).getStudentID() + ";" +
+                                Viewer.exams.get(i).getCourseID() + ";"
                 );
             }
             outputStream.close();
@@ -154,130 +140,43 @@ public class ExamController{
 
     }
 
-    public void loadExamsFile(String fileName,String selection){
+    public void loadExamsFile(){
         Scanner scanner = null;
         try {
-            scanner = new Scanner(new File("src/Files/"+fileName)).useDelimiter(";").useLocale(Locale.US);
+            scanner = new Scanner(new File("src/Files/ExamFile")).useDelimiter(";").useLocale(Locale.US);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         while(scanner.hasNextInt()){
             int examID = scanner.nextInt();
+            int teacherID = scanner.nextInt();
             int studentID = scanner.nextInt();
-            int courseID = scanner.nextInt();
-            String description = scanner.next();
+            int CourseID = scanner.nextInt();
 
-            chooseList(selection).add(new Exam(examID,studentID,courseID,description));
+            Viewer.exams.add(new Exam(examID,teacherID,studentID,CourseID));
             scanner.nextLine();
         }
     }
 
-    public void printExams(String selection){
+    public void printExams(){
 
-        for (Exam exam:chooseList(selection)
+        for (Exam exam:Viewer.exams
                 ) {
 
-            if(selection=="ManAss"){
-                System.out.println("Mandatory Assignment ID: " + exam.getExamID() + " Teacher ID(s): " + Viewer.courses.get(exam.getCourseID() - 1).getAllTeachers() +
-                        " Student ID: " + exam.getStudentID() + " Course ID: " + exam.getCourseID());
-            }else {
-                System.out.println("Exam ID: " + exam.getExamID() + " Teacher ID(s): " + Viewer.courses.get(exam.getCourseID() - 1).getAllTeachers() +
-                        " Student ID: " + exam.getStudentID() + " Course ID: " + exam.getCourseID());
-            }
+            System.out.println("examID: " + exam.getExamID() + " Lære ID: " + exam.getTeacherID() +
+                    " Student ID: " + exam.getStudentID() + " Kursus ID: " + exam.getCourseID());
 
         }
 
     }
 
-    public void printExamByID (int ID,String selection) {
-
-        Exam exam = new Exam(0,0,0,"");
-        Teacher teacher = new Teacher(0,"");
-        Student student = new Student(0,"");
-        Course course = new Course(0,"","");
-        String teacherNames = "";
-        Boolean found = false;
-
-        for (Exam exam1: chooseList(selection)
-             ) {
-            if (exam1.getExamID() == ID) {
-
-                found = true;
-                exam = exam1;
-                break;
-
-            }
-        }
-
-        for (Student student1: Viewer.students
-                ) {
-            if (student1.getID() == exam.getStudentID()) {
-
-                student = student1;
-                break;
-
-            }
-        }
-
-        for (Course course1: Viewer.courses
-                ) {
-            if (course1.getID() == exam.getCourseID()) {
-
-                course = course1;
-                break;
-
-            }
-        }
-
-        for (int teacherID: course.getAllTeachers()
-             ) {
-        for (Teacher teacher1: Viewer.teachers
-                ) {
-            if (teacher1.getID() == teacherID) {
-
-                teacherNames = teacherNames+teacher1.getName()+"/";
-
-            }
-        }
-        }
-
-        if (teacherNames != null && teacherNames.length() > 0) {
-            teacherNames = teacherNames.substring(0, teacherNames.length() - 1);}
-
-
-
-        if (!found) {
-
-            if(selection=="ManAss"){
-                System.out.println("Couldn't find Mandatory Assignment with ID: " + ID);
-            }else{
-            System.out.println("Couldn't find exam with ID: " + ID);}
-
-        } else {
-
-            if(selection=="ManAss"){
-                System.out.println("Mandatory assignment info for exam ID: " + ID); }
-                else{
-            System.out.println("Exam info for exam ID: " + ID); }
-
-            System.out.println("---------------------------");
-            System.out.println("Student: " + student.getName());
-            System.out.println("Teacher(s): " + teacherNames);
-            System.out.println("Course: " + course.getName());
-            System.out.println("Subject: " + course.getSubject());
-            System.out.println("---------------------------");
-            System.out.println("Description: " + exam.getDescription());
-        }
-
-    }
-
-    private boolean deleteExamPrivate(int examID,String selection) {
+    private boolean deleteExamPrivate(int examID) {
 
         boolean found = false;
 
-        for (Exam exam : chooseList(selection)) {
+        for (Exam exam : Viewer.exams) {
             if (exam.getExamID() == examID) {
-                chooseList(selection).remove(exam);
+                Viewer.exams.remove(exam);
                 found = true;
                 break;
 
@@ -286,56 +185,37 @@ public class ExamController{
         return found;
     }
 
-    public void deleteExam (int examID,String selection){
+    public void deleteExam (int examID){
 
         boolean found = false;
 
-        found = deleteExamPrivate(examID,selection);
+        found = deleteExamPrivate(examID);
 
-        if (selection=="ManAss"){
         if (found) {
-            System.out.println("Mandatory assignment deleted!");
+            System.out.println("Exam deleted!");
         } else {
-            System.out.println("Mandatory assignment not found!");
-        }}else{
-            if (found) {
-                System.out.println("Exam deleted!");
-            } else {
-                System.out.println("Exam not found!");
-            }
+            System.out.println("Exam not found!");
         }
 
 
     }
 
-    public void deleteExamsByCourse (int courseID,String selection) {
+    public void deleteExamsByCourse (int courseID) {
 
         int counter = 0;
 
-        for (int i = 0; i < chooseList(selection).size(); i++) {
+        for (int i = 0; i < Viewer.exams.size(); i++) {
             {
 
-<<<<<<< Updated upstream
                 if (Viewer.exams.get(i).getCourseID() == courseID) {
                     deleteExamPrivate(Viewer.exams.get(i).getExamID());
                     counter++;
                     i--;
                 }
-=======
-            if (chooseList(selection).get(i).getCourseID() == courseID) {
-                deleteExamPrivate(chooseList(selection).get(i).getExamID(),selection);
-                counter++;
-                i--;
-            }
->>>>>>> Stashed changes
 
             }}
 
-        if(selection=="ManAss"){
-        System.out.println(counter + " mandatory assignments deleted.");
-        }else{
-            System.out.println(counter + " exams deleted.");
-        }
+        System.out.println(counter + " exams deleted.");
 
     }
 

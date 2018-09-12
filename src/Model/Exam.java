@@ -3,23 +3,15 @@ package Model;
 public class Exam {
 
     int examID;
-    int teacherID;
     int studentID;
     int courseID;
+    String description;
 
-    public Exam(int examID, int teacherID, int studentID, int courseID) {
+    public Exam(int examID, int studentID, int courseID,String description) {
         this.examID = examID;
-        this.teacherID = teacherID;
         this.studentID = studentID;
         this.courseID = courseID;
-    }
-
-    public int getTeacherID() {
-        return teacherID;
-    }
-
-    public void setTeacherID(int teacherID) {
-        this.teacherID = teacherID;
+        this.description = description;
     }
 
     public int getStudentID() {
@@ -44,5 +36,13 @@ public class Exam {
 
     public void setCourseID(int courseID) {
         this.courseID = courseID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -12,6 +12,7 @@ public class Viewer {
     public static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
     public static ArrayList<Subject> subjects = new ArrayList<Subject>();
     public static ArrayList<Course> courses = new ArrayList<Course>();
+    public static ArrayList<Exam> mandatoryAssignments = new ArrayList<Exam>();
 
 
 
@@ -20,23 +21,26 @@ public class Viewer {
     CourseController courseController = new CourseController();
     SubjectController subjectController = new SubjectController();
     ExamController examController = new ExamController();
+    MandatoryAssignmentController mandatoryAssignmentController = new MandatoryAssignmentController();
 
     public void loadAll (){
 
         studentController.loadStudentsFile();
-        examController.loadExamsFile();
+        examController.loadExamsFile("ExamFile","");
         teacherController.loadTeacherFile();
         courseController.loadCourseFile();
         subjectController.loadSubjectFile();
+        mandatoryAssignmentController.loadManAssFile("MandatoryAssignmentFile");
 
     }
 
     public void saveAll () throws FileNotFoundException {
         studentController.saveStudentsFile();
-        examController.saveExamsFile();
+        examController.saveExamsFile("ExamFile","");
         teacherController.saveTeacher();
         courseController.saveCourseFile();
         subjectController.saveSubjects();
+        mandatoryAssignmentController.saveManAssFile("MandatoryAssignmentFile");
 
     }
 
@@ -44,16 +48,17 @@ public class Viewer {
         loadAll();
 
 
+        test();
         //Indsæt menu
-        UIMainMenu.mainMenu();
+        //UIMainMenu.mainMenu();
 
 
         saveAll();
     }
 
     public void test () {
-        
-        //Indsæt tests
+
+
 
     }
 

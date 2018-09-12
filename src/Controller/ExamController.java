@@ -31,29 +31,29 @@ public class ExamController {
 
 
         for (Course course:Viewer.courses
-             ) {
+                ) {
             if (course.getID() == courseID){
                 found++;
-            for (Teacher teacher : Viewer.teachers
-                    ) {
+                for (Teacher teacher : Viewer.teachers
+                        ) {
 
-                if (teacher.getID() == teacherID){
+                    if (teacher.getID() == teacherID){
 
-                    found++;
+                        found++;
 
-                    for (Student student : Viewer.students) {
+                        for (Student student : Viewer.students) {
 
-                        if (student.getID() == studentID) {
-                            addExamPrivate(teacherID, studentID, courseID);
-                            found++;
-                            break;
+                            if (student.getID() == studentID) {
+                                addExamPrivate(teacherID, studentID, courseID);
+                                found++;
+                                break;
+                            }
                         }
-                    }
 
-                    break;
+                        break;
+                    }
                 }
-            }
-            break;
+                break;
             }
         }
 
@@ -207,13 +207,13 @@ public class ExamController {
         for (int i = 0; i < Viewer.exams.size(); i++) {
             {
 
-            if (Viewer.exams.get(i).getCourseID() == courseID) {
-                deleteExamPrivate(Viewer.exams.get(i).getExamID());
-                counter++;
-                i--;
-            }
+                if (Viewer.exams.get(i).getCourseID() == courseID) {
+                    deleteExamPrivate(Viewer.exams.get(i).getExamID());
+                    counter++;
+                    i--;
+                }
 
-        }}
+            }}
 
         System.out.println(counter + " exams deleted.");
 

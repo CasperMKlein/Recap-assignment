@@ -10,9 +10,7 @@ import java.util.Scanner;
 import static Viewer.Viewer.subjects;
 
 public class SubjectController {
-
     public void deleteSubject(String subject_name) {
-
         boolean found = false;
 
         for (Subject subject : Viewer.subjects) {
@@ -35,11 +33,11 @@ public class SubjectController {
 
     public void saveSubjects() {
         try {
-            PrintWriter printWriter = new PrintWriter("src/Files/SubjectFile");
+            PrintWriter fileWriter = new PrintWriter("src/Files/SubjectFile");
             for (int i = 0; i < subjects.size(); i++) {
-                printWriter.print(subjects.get(i).getName() + ";" + "\n");
+                fileWriter.print(subjects.get(i).getName() + ";" + "\n");
             }
-            printWriter.close();
+            fileWriter.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -52,17 +50,15 @@ public class SubjectController {
     }
 
     public void loadSubjectFile(){
-        Scanner scanner = null;
         try {
-            scanner = new Scanner(new File("src/Files/SubjectFile")).useDelimiter(";").useLocale(Locale.US);
+            Scanner fileScanner = new Scanner(new File("src/Files/SubjectFile")).useDelimiter(";").useLocale(Locale.US);
+            while(fileScanner.hasNext()){
+                String name = fileScanner.next();
+                subjects.add(new Subject(name));
+                fileScanner.nextLine();
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
-        while(scanner.hasNext()){
-            String name = scanner.next();
-
-            subjects.add(new Subject(name));
-            scanner.nextLine();
         }
     }
 }

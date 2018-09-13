@@ -75,6 +75,7 @@ public class UIExamMenu {
                 System.out.println("Type the exam ID.");
                 int examID1 = in.nextInt();
                 examController.printExamByID(examID1,"");
+                break;
 
             case "7":
                 UIMainMenu.mainMenu();

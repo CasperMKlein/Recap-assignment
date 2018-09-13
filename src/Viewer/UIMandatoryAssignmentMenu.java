@@ -76,6 +76,7 @@ public class UIMandatoryAssignmentMenu {
                 System.out.println("Type the mandatory assignment ID.");
                 int ManAssID1 = in.nextInt();
                 mandatoryAssignmentController.printManAssByID(ManAssID1);
+                break;
 
             case "7":
                 UIMainMenu.mainMenu();

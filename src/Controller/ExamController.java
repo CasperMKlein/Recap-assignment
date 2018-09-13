@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -150,15 +151,25 @@ public class ExamController{
     }
 
     public void printExams(String selection){
+        List<Integer> integers = new ArrayList<>();
 
         for (Exam exam:chooseList(selection)
                 ) {
 
+            for (Course course: Viewer.courses
+                 ) {
+
+                if(course.getID()==exam.getCourseID()){
+                    integers = course.getAllTeachers();
+                }
+
+            }
+
             if(selection=="ManAss"){
-                System.out.println("Mandatory Assignment ID: " + exam.getExamID() + " Teacher ID(s): " + Viewer.courses.get(exam.getCourseID() - 1).getAllTeachers() +
+                System.out.println("Mandatory Assignment ID: " + exam.getExamID() + " Teacher ID(s): " + integers +
                         " Student ID: " + exam.getStudentID() + " Course ID: " + exam.getCourseID());
             }else {
-                System.out.println("Exam ID: " + exam.getExamID() + " Teacher ID(s): " + Viewer.courses.get(exam.getCourseID() - 1).getAllTeachers() +
+                System.out.println("Exam ID: " + exam.getExamID() + " Teacher ID(s): " + integers +
                         " Student ID: " + exam.getStudentID() + " Course ID: " + exam.getCourseID());
             }
 

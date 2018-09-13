@@ -1,5 +1,8 @@
 package Viewer;
 
+import Controller.ExamController;
+import Controller.MandatoryAssignmentController;
+
 import java.util.Scanner;
 
 public class UIMainMenu {
@@ -16,7 +19,8 @@ public class UIMainMenu {
                         "\n3: Subject overview" +
                         "\n4: Exam overview" +
                         "\n5: Teacher overview" +
-                        "\n6: Save & exit"
+                        "\n6: Mandatory assignment overview" +
+                        "\n7: Save & exit"
         );
 
         String answer = in.nextLine();
@@ -28,11 +32,12 @@ public class UIMainMenu {
                 break;
             case "3": System.out.println("subject!!!");
                 break;
-            case "4": System.out.println("Exams!!!!!!!!");
+            case "4": UIExamMenu.examMenu();
                 break;
             case "5": UITeacherMenu.teacherMenu();
                 break;
-            case "6": // ¯\_(ツ)_/¯
+            case "6": UIMandatoryAssignmentMenu.ManAssMenu();
+            case "7": // ¯\_(ツ)_/¯
                 break;
             default: mainMenu();
                 break;

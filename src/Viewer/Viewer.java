@@ -48,17 +48,13 @@ public class Viewer {
         loadAll();
 
 
-        test();
-        //Indsæt menu
-        //UIMainMenu.mainMenu();
+        UIMainMenu.mainMenu();
 
 
         saveAll();
     }
 
     public void test () {
-
-
 
     }
 

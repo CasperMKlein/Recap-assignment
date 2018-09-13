@@ -40,6 +40,7 @@ public class UIExamMenu {
                 System.out.println("Type the course's ID.");
                 int courseID = in.nextInt();
                 examController.addExam(studentID,courseID,description,"");
+                examMenu();
                 break;
 
             case "2":
@@ -48,6 +49,7 @@ public class UIExamMenu {
                 System.out.println("Type the course's ID.");
                 int courseID1 = in.nextInt();
                 examController.addExamsByCourse(courseID1,description1,"");
+                examMenu();
                 break;
 
             case "3":
@@ -56,6 +58,7 @@ public class UIExamMenu {
                 int examID = in.nextInt();
 
                 examController.deleteExam(examID,"");
+                examMenu();
                 break;
 
             case "4":
@@ -64,17 +67,20 @@ public class UIExamMenu {
                 int courseID2 = in.nextInt();
 
                 examController.deleteExamsByCourse(courseID2,"");
+                examMenu();
                 break;
 
             case "5":
 
                 examController.printExams("");
+                examMenu();
                 break;
 
             case "6":
                 System.out.println("Type the exam ID.");
                 int examID1 = in.nextInt();
                 examController.printExamByID(examID1,"");
+                examMenu();
                 break;
 
             case "7":

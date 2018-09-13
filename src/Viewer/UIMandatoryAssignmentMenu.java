@@ -41,6 +41,7 @@ public class UIMandatoryAssignmentMenu {
                 System.out.println("Type the course's ID.");
                 int courseID = in.nextInt();
                 mandatoryAssignmentController.addManAss(studentID,courseID,description);
+                ManAssMenu();
                 break;
 
             case "2":
@@ -49,6 +50,7 @@ public class UIMandatoryAssignmentMenu {
                 System.out.println("Type the course's ID.");
                 int courseID1 = in.nextInt();
                 mandatoryAssignmentController.addManAssByCourse(courseID1,description1);
+                ManAssMenu();
                 break;
 
             case "3":
@@ -57,6 +59,7 @@ public class UIMandatoryAssignmentMenu {
                 int ManAssID = in.nextInt();
 
                 mandatoryAssignmentController.deleteManAss(ManAssID);
+                ManAssMenu();
                 break;
 
             case "4":
@@ -65,17 +68,20 @@ public class UIMandatoryAssignmentMenu {
                 int courseID2 = in.nextInt();
 
                 mandatoryAssignmentController.deleteManAssByCourse(courseID2);
+                ManAssMenu();
                 break;
 
             case "5":
 
                 mandatoryAssignmentController.printManAss();
+                ManAssMenu();
                 break;
 
             case "6":
                 System.out.println("Type the mandatory assignment ID.");
                 int ManAssID1 = in.nextInt();
                 mandatoryAssignmentController.printManAssByID(ManAssID1);
+                ManAssMenu();
                 break;
 
             case "7":

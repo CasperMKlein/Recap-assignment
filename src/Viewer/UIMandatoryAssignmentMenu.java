@@ -1,17 +1,16 @@
 package Viewer;
 
 import Controller.ExamController;
+import Controller.InputCheck;
 import Controller.MandatoryAssignmentController;
 
 import java.util.Scanner;
 
 public class UIMandatoryAssignmentMenu {
 
-    private static Scanner in = new Scanner(System.in);
-
-
-
     public static void ManAssMenu() {
+
+        InputCheck inputCheck = new InputCheck();
 
         MandatoryAssignmentController mandatoryAssignmentController = new MandatoryAssignmentController();
 
@@ -29,26 +28,26 @@ public class UIMandatoryAssignmentMenu {
                         "\n7: Back"
         );
 
-        answer = in.nextLine();
+        answer = inputCheck.inputString();
 
         switch (answer){
             case "1":
 
                 System.out.println("Type the mandatory assignment description.");
-                String description = in.nextLine().toString();
+                String description = inputCheck.inputString();
                 System.out.println("Type the student's ID.");
-                int studentID = in.nextInt();
+                int studentID = inputCheck.inputIntegerSvar();
                 System.out.println("Type the course's ID.");
-                int courseID = in.nextInt();
+                int courseID = inputCheck.inputIntegerSvar();
                 mandatoryAssignmentController.addManAss(studentID,courseID,description);
                 ManAssMenu();
                 break;
 
             case "2":
                 System.out.println("Type the mandatory assignment description.");
-                String description1 = in.nextLine().toString();
+                String description1 = inputCheck.inputString();
                 System.out.println("Type the course's ID.");
-                int courseID1 = in.nextInt();
+                int courseID1 = inputCheck.inputIntegerSvar();
                 mandatoryAssignmentController.addManAssByCourse(courseID1,description1);
                 ManAssMenu();
                 break;
@@ -56,7 +55,7 @@ public class UIMandatoryAssignmentMenu {
             case "3":
 
                 System.out.println("Type the mandatory assignment ID.");
-                int ManAssID = in.nextInt();
+                int ManAssID = inputCheck.inputIntegerSvar();
 
                 mandatoryAssignmentController.deleteManAss(ManAssID);
                 ManAssMenu();
@@ -65,7 +64,7 @@ public class UIMandatoryAssignmentMenu {
             case "4":
 
                 System.out.println("Type the course ID for the course who's mandatory assignments you want deleted.");
-                int courseID2 = in.nextInt();
+                int courseID2 = inputCheck.inputIntegerSvar();
 
                 mandatoryAssignmentController.deleteManAssByCourse(courseID2);
                 ManAssMenu();
@@ -79,7 +78,7 @@ public class UIMandatoryAssignmentMenu {
 
             case "6":
                 System.out.println("Type the mandatory assignment ID.");
-                int ManAssID1 = in.nextInt();
+                int ManAssID1 = inputCheck.inputIntegerSvar();
                 mandatoryAssignmentController.printManAssByID(ManAssID1);
                 ManAssMenu();
                 break;

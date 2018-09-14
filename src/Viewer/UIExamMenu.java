@@ -1,16 +1,18 @@
 
+
 package Viewer;
 
         import Controller.ExamController;
-
-        import java.util.Scanner;
+        import Controller.InputCheck;
 
 public class UIExamMenu {
 
-    private static Scanner in = new Scanner(System.in);
+
 
 
     public static void examMenu() {
+
+        InputCheck inputCheck = new InputCheck();
 
         ExamController examController = new ExamController();
 
@@ -28,26 +30,26 @@ public class UIExamMenu {
                         "\n7: Back"
         );
 
-        answer = in.nextLine();
+        answer = inputCheck.inputString();
 
         switch (answer){
             case "1":
 
                 System.out.println("Type the exam description.");
-                String description = in.nextLine().toString();
+                String description = inputCheck.inputString();
                 System.out.println("Type the student's ID.");
-                int studentID = in.nextInt();
+                int studentID = inputCheck.inputIntegerSvar();
                 System.out.println("Type the course's ID.");
-                int courseID = in.nextInt();
+                int courseID = inputCheck.inputIntegerSvar();
                 examController.addExam(studentID,courseID,description,"");
                 examMenu();
                 break;
 
             case "2":
                 System.out.println("Type the exam description.");
-                String description1 = in.nextLine().toString();
+                String description1 = inputCheck.inputString();
                 System.out.println("Type the course's ID.");
-                int courseID1 = in.nextInt();
+                int courseID1 = inputCheck.inputIntegerSvar();
                 examController.addExamsByCourse(courseID1,description1,"");
                 examMenu();
                 break;
@@ -55,7 +57,7 @@ public class UIExamMenu {
             case "3":
 
                 System.out.println("Type the exam ID.");
-                int examID = in.nextInt();
+                int examID = inputCheck.inputIntegerSvar();
 
                 examController.deleteExam(examID,"");
                 examMenu();
@@ -64,7 +66,7 @@ public class UIExamMenu {
             case "4":
 
                 System.out.println("Type the course ID for the course who's exams you want deleted.");
-                int courseID2 = in.nextInt();
+                int courseID2 = inputCheck.inputIntegerSvar();
 
                 examController.deleteExamsByCourse(courseID2,"");
                 examMenu();
@@ -78,7 +80,7 @@ public class UIExamMenu {
 
             case "6":
                 System.out.println("Type the exam ID.");
-                int examID1 = in.nextInt();
+                int examID1 = inputCheck.inputIntegerSvar();
                 examController.printExamByID(examID1,"");
                 examMenu();
                 break;
